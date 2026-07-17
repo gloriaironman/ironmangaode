@@ -65,6 +65,11 @@
   .tier-legend .lg { margin-right: 6px; font-weight:700;}
   details.info summary { cursor:pointer; font-size:13px; color:#5a6169; padding:8px 0; }
   .subtle { font-size:12px; color:#c7ccd6; text-shadow:0 1px 4px rgba(0,0,0,.5); margin-top:24px; text-align:center;}
+  .sale-rule { display:flex; align-items:center; gap:10px; margin-bottom:18px;
+    padding:12px 16px; background:rgba(255,247,230,.96); border:1px solid #ffd591;
+    border-left:4px solid #fa8c16; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,.18);
+    font-size:13.5px; color:#ad4e00; font-weight:500; line-height:1.5; }
+  .sale-rule .ico { font-size:16px; }
 </style>
 </head>
 <body>
@@ -73,6 +78,7 @@
     <h1>顶展 / 钻展 定价查询工具</h1>
     <p>零售家装行业 · FY27S1（4-9月） · 数据来源：顶钻展定价钉钉文档</p>
   </header>
+  <div class="sale-rule"><span class="ico">📌</span><span>售卖规则不变：5折，3000元起投；具体金额以后台询价为准。</span></div>
   <div class="tabs">
     <div class="tab active" data-tab="top">顶展</div>
     <div class="tab" data-tab="diamond">钻展</div>
