@@ -65,11 +65,17 @@
   .tier-legend .lg { margin-right: 6px; font-weight:700;}
   details.info summary { cursor:pointer; font-size:13px; color:#5a6169; padding:8px 0; }
   .subtle { font-size:12px; color:#c7ccd6; text-shadow:0 1px 4px rgba(0,0,0,.5); margin-top:24px; text-align:center;}
-  .sale-rule { display:flex; align-items:center; gap:10px; margin-bottom:18px;
-    padding:12px 16px; background:rgba(255,247,230,.96); border:1px solid #ffd591;
+  .sale-rule { display:flex; align-items:flex-start; gap:10px; margin-bottom:18px;
+    padding:14px 18px; background:rgba(255,247,230,.96); border:1px solid #ffd591;
     border-left:4px solid #fa8c16; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,.18);
-    font-size:13.5px; color:#ad4e00; font-weight:500; line-height:1.5; }
-  .sale-rule .ico { font-size:16px; }
+    font-size:13px; color:#7a4b00; line-height:1.7; }
+  .sale-rule .ico { font-size:16px; flex:none; margin-top:1px; }
+  .sale-rule .rule-body { flex:1; }
+  .sale-rule .rn { margin:2px 0; }
+  .sale-rule .rn.sub { padding-left:20px; }
+  .sale-rule .rn.h { margin-top:6px; font-weight:600; color:#ad4e00; }
+  .sale-rule .rn b { color:#ad4e00; }
+  .sale-rule a { color:#c2410c; text-decoration:underline; word-break:break-all; }
 </style>
 </head>
 <body>
@@ -78,7 +84,7 @@
     <h1>顶展 / 钻展 定价查询工具</h1>
     <p>零售家装行业 · FY27S1（4-9月） · 数据来源：顶钻展定价钉钉文档</p>
   </header>
-  <div class="sale-rule"><span class="ico">📌</span><span>售卖规则不变：5折，3000元起投；具体金额以后台询价为准。</span></div>
+  <div class="sale-rule"><span class="ico">📌</span><span class="rule-body" id="tab-note"></span></div>
   <div class="tabs">
     <div class="tab active" data-tab="top">顶展</div>
     <div class="tab" data-tab="diamond">钻展</div>
@@ -211,14 +217,30 @@ function renderTierInfo(){
   document.getElementById('note-box').textContent = DATA.note || '';
 }
 
+const TOP_NOTE = [
+  '<div class="rn"><b>折扣：</b>5折，可按刊例价售卖。</div>',
+  '<div class="rn"><b>门槛：</b>3,000元起投（6.15生效，生效前按9000起投），投放门店必须购买商户通。如折后价无法达到起投门槛，按刊例价售卖。</div>',
+  '<div class="rn h">● 投放要求：</div>',
+  '<div class="rn sub"><b>○ 售卖方式：</b>包类目包城市，从上刊当日开始，以30天为单位售卖，同一商家，同一类目（仅包含所属类目，不包含下级类目），同一城市，支持锁定档期最长180天，180天不可间断，且须与前序排期连续预定。最晚截至排期起投日后一年。</div>',
+  '<div class="rn sub"><b>○ 投放门店：</b>需与购买类目一致，部分类目可进行跨类目投放（每新增一个类目，按照该类目价格进行叠加）。一个城市可提交多个门店，资源位透出距离用户最近的1个门店。</div>',
+  '<div class="rn sub"><b>○ 搜索关键词：</b>品类词包固定。</div>',
+  '<div class="rn h">● 备注：</div>',
+  '<div class="rn sub">○ 家具、助听器类目曝光量为100%，其他类目曝光量为95%，对广告透出有少量影响。</div>',
+  '<div class="rn sub">○ 品广投放准入规则，请先自查。<a href="https://alidocs.dingtalk.com/i/nodes/YQBnd5ExVEjea40qCbl0jrxaJyeZqMmz?utm_scene=team_space" target="_blank" rel="noopener">查看准入规则</a></div>',
+  '<div class="rn sub">○ 切忌过度承诺，排期不要承诺，不要有任何交付 曝光 客资 效果类的承诺。</div>'
+].join('');
+const DIAMOND_NOTE = '售卖规则不变：5折，3000元起投；具体金额以后台询价为准。';
+function setTabNote(t){ document.getElementById('tab-note').innerHTML = (t==='top') ? TOP_NOTE : DIAMOND_NOTE; }
 document.querySelectorAll('.tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('panel-'+tab.dataset.tab).classList.add('active');
+    setTabNote(tab.dataset.tab);
   });
 });
+setTabNote('top');
 ['top-city','top-cat'].forEach(id=>document.getElementById(id).addEventListener('input',renderTop));
 ['d-city','d-cat'].forEach(id=>document.getElementById(id).addEventListener('input',renderDiamond));
 renderTierInfo();
