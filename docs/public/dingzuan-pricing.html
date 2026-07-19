@@ -30,6 +30,14 @@
   .tab:not(.active):hover { background: #e2e5e9; }
   .panel { display: none; }
   .panel.active { display: block; }
+  .tabs-l1 { display: flex; gap: 10px; margin-bottom: 14px; }
+  .l1 { padding: 8px 24px; border-radius: 22px; font-size: 15px; font-weight: 600; cursor: pointer;
+    background: rgba(255,255,255,.85); color: #5a6169; border: 1px solid rgba(255,255,255,.6);
+    box-shadow: 0 2px 8px rgba(0,0,0,.15); transition: all .15s; }
+  .l1.active { background: #1f2329; color: #fff; border-color: #1f2329; }
+  .l1:not(.active):hover { background: #fff; color: #1f2329; }
+  .ind { display: none; }
+  .ind.active { display: block; }
   .card { background: rgba(255,255,255,.96); border-radius: 12px; padding: 22px 24px;
     box-shadow: 0 8px 28px rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.6);
     backdrop-filter: blur(4px); margin-bottom: 16px; }
@@ -87,6 +95,11 @@
     <h1>顶展 / 钻展 定价查询工具</h1>
     <p>零售家装行业 · FY27S1（4-9月） · 数据来源：顶钻展定价钉钉文档</p>
   </header>
+  <div class="tabs-l1">
+    <div class="l1 active" data-ind="retail">零售家装</div>
+    <div class="l1" data-ind="highfreq">高频</div>
+  </div>
+  <div class="ind active" id="ind-retail">
   <div class="sale-rule"><span class="ico">📌</span><span class="rule-body" id="tab-note"></span></div>
   <div class="tabs">
     <div class="tab active" data-tab="top">顶展</div>
@@ -122,6 +135,15 @@
       <div class="note" id="note-box"></div>
     </div>
   </details>
+  </div>
+  <div class="ind" id="ind-highfreq">
+    <div class="tabs">
+      <div class="tab active" data-tab="hf-top">顶展</div>
+      <div class="tab" data-tab="hf-diamond">钻展</div>
+    </div>
+    <div class="panel active" id="panel-hf-top"><div class="card"><div class="empty">高频行业 · 顶展 数据待补充</div></div></div>
+    <div class="panel" id="panel-hf-diamond"><div class="card"><div class="empty">高频行业 · 钻展 数据待补充</div></div></div>
+  </div>
   <div class="subtle">价格为该城市该类目的官方刊例价，实际以最新政策为准。</div>
 </div>
 <datalist id="city-list"></datalist>
@@ -271,13 +293,22 @@ const DIAMOND_NOTE = [
   "<div class=\"rn sub4\">○ 宜搭审批通过后联系 @李雪(弥光) 进行白名单 list 收集审核。</div>"
 ].join('');
 function setTabNote(t){ document.getElementById('tab-note').innerHTML = (t==='top') ? TOP_NOTE : DIAMOND_NOTE; }
+document.querySelectorAll('.l1').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.l1').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.ind').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('ind-'+t.dataset.ind).classList.add('active');
+  });
+});
 document.querySelectorAll('.tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    const scope = tab.closest('.ind');
+    scope.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    scope.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('panel-'+tab.dataset.tab).classList.add('active');
-    setTabNote(tab.dataset.tab);
+    if(scope.id==='ind-retail') setTabNote(tab.dataset.tab);
   });
 });
 setTabNote('top');
