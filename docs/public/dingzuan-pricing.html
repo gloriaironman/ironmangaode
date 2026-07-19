@@ -73,6 +73,9 @@
   .sale-rule .rule-body { flex:1; }
   .sale-rule .rn { margin:2px 0; }
   .sale-rule .rn.sub { padding-left:20px; }
+  .sale-rule .rn.sub2 { padding-left:40px; }
+  .sale-rule .rn.sub3 { padding-left:62px; }
+  .sale-rule .rn.sub4 { padding-left:84px; }
   .sale-rule .rn.h { margin-top:6px; font-weight:600; color:#ad4e00; }
   .sale-rule .rn b { color:#ad4e00; }
   .sale-rule a { color:#c2410c; text-decoration:underline; word-break:break-all; }
@@ -235,7 +238,38 @@ const TOP_NOTE = [
   '<div class="rn sub">○ 品广投放准入规则，请先自查。<a href="https://alidocs.dingtalk.com/i/nodes/YQBnd5ExVEjea40qCbl0jrxaJyeZqMmz?utm_scene=team_space" target="_blank" rel="noopener">查看准入规则</a></div>',
   '<div class="rn sub">○ 切忌过度承诺，排期不要承诺，不要有任何交付 曝光 客资 效果类的承诺。</div>'
 ].join('');
-const DIAMOND_NOTE = '售卖规则不变：5折，3000元起投；具体金额以后台询价为准。';
+const DIAMOND_NOTE = [
+  "<div class=\"rn h\">1. 钻展产品介绍：</div>",
+  "<div class=\"rn sub\">抢占城市同行核心展位，进攻截流。</div>",
+  "<div class=\"rn h\">2. 展示逻辑：</div>",
+  "<div class=\"rn sub\"><b>● 展示条件（需同时满足）：</b></div>",
+  "<div class=\"rn sub2\">○ 购买对应类目并配置上刊，计划、创意均打开投放。</div>",
+  "<div class=\"rn sub2\">○ 在投放对应的 atag 下的黄页门店展示钻展。</div>",
+  "<div class=\"rn sub2\">○ 有门店的组件需要开启效果广告在投。</div>",
+  "<div class=\"rn sub\"><b>● 召回范围：</b></div>",
+  "<div class=\"rn sub2\">○ 当前门店召回不受距离限制。</div>",
+  "<div class=\"rn sub\"><b>● 各形态说明：</b></div>",
+  "<div class=\"rn sub2\">○ 有店-广告在投：满足全部展示条件时展示完整品牌信息+行动点。</div>",
+  "<div class=\"rn sub2\">○ 有店-广告不在投：有门店但效果广告未在投时的降级展示。</div>",
+  "<div class=\"rn sub2\">○ 有店-超过召回距离：有门店但超出召回范围时的降级展示。</div>",
+  "<div class=\"rn sub2\">○ 无门店：无黄页门店，展示品牌信息+H5跳转行动点。</div>",
+  "<div class=\"rn h\">3. 定向能力：不支持</div>",
+  "<div class=\"rn\"><b>折扣：</b>5折，可按刊例价售卖（装修设计不包含，无折扣）。</div>",
+  "<div class=\"rn\"><b>门槛：</b>3,000元起投。无门店一跳唤端微信/淘宝/支付宝小程序的，起投门槛5万元。不要求购买商户通。如折后价无法达到起投门槛，按刊例价售卖。</div>",
+  "<div class=\"rn h\">● 投放要求：</div>",
+  "<div class=\"rn sub\"><b>○ 售卖方式：</b>包类目包城市，从上刊当日开始，以30天为单位售卖，同一商家，同一类目（仅包含所属类目，不包含下级类目），同一城市，支持锁定档期最长180天，180天不可间断，且须与前序排期连续预定。最晚截至排期起投日后一年。</div>",
+  "<div class=\"rn sub\"><b>○ 投放门店：</b>如商家有门店，投放门店需与购买类目保持一致；如商家无门店无法确认类目归属，提报行业运营和PDSA团队会诊。</div>",
+  "<div class=\"rn h\">● 备注：</div>",
+  "<div class=\"rn sub\">○ 品广投放准入规则：<a href=\"https://alidocs.dingtalk.com/i/nodes/amweZ92PV6DbOdgzUKYb9lNy8xEKBD6p\" target=\"_blank\" rel=\"noopener\">查看准入规则</a></div>",
+  "<div class=\"rn sub\">○ 切忌过度承诺，排期不要承诺，不要有任何交付 曝光 客资 效果类的承诺。</div>",
+  "<div class=\"rn sub\">○ 全量价格文档（如需在6.15前签约，需遵循系统里的老价格，一城一价6.15生效）。</div>",
+  "<div class=\"rn sub2\">■ 注意：药店类目涉及准入评估，注意审核要求，流程如下：</div>",
+  "<div class=\"rn sub3\">● 1、投放客户符合广告准入资质（上刊环节提供：《药品经营许可证》/《药品生产许可证》+《广审表》+《广审样件表》）<a href=\"https://alidocs.dingtalk.com/i/nodes/AR4GpnMqJzKpOoklFq9g62Y48Ke0xjE3?utm_scene=person_space&iframeQuery=sheet_range%3Dkgqie6hm_0_0_1_1\" target=\"_blank\" rel=\"noopener\">资质要求</a>；</div>",
+  "<div class=\"rn sub3\">● 2、药企相关企业，进行跨类目准入评审，进行宜搭提交：<a href=\"https://yida-group.alibaba-inc.com/APP_N3LK7GLQLGOF32XYXTEO/submission/FORM-FFE7782FC55D417EBC667AC7BE507120MQT4?processCode=TPROC--4HC666B101I6A69FLGU9Z7CVK4LF3DTCBU7QM0&corpid=dingd8e1123006514592\" target=\"_blank\" rel=\"noopener\">跨类目评审宜搭</a></div>",
+  "<div class=\"rn sub3\">● 3、药企相关企业，涉及无门店投放，进行无店投放准入评审：<a href=\"https://alidocs.dingtalk.com/i/nodes/amweZ92PV6DbOdgzUKYb9lNy8xEKBD6p\" target=\"_blank\" rel=\"noopener\">无店投放准入</a></div>",
+  "<div class=\"rn sub4\">○ 提交宜搭：<a href=\"https://yida-group.alibaba-inc.com/APP_N3LK7GLQLGOF32XYXTEO/workbench/FORM-00B2908CF2714DF38D288FCE8D4285CAS1J4\" target=\"_blank\" rel=\"noopener\">无店投放宜搭</a></div>",
+  "<div class=\"rn sub4\">○ 宜搭审批通过后联系 @李雪(弥光) 进行白名单 list 收集审核。</div>"
+].join('');
 function setTabNote(t){ document.getElementById('tab-note').innerHTML = (t==='top') ? TOP_NOTE : DIAMOND_NOTE; }
 document.querySelectorAll('.tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
